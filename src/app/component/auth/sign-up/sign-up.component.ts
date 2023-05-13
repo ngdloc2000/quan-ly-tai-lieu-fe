@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {SignUpService} from "../../../service/auth/signUp/sign-up.service";
+import {AuthService} from "../../../service/auth.service";
 import {SignUpForm} from "../../../dto/SignUpForm";
 
 @Component({
@@ -14,7 +14,7 @@ export class SignUpComponent {
   signUpForm: SignUpForm;
   status: string = '';
 
-  constructor(private signUpService: SignUpService) {
+  constructor(private authService: AuthService) {
   }
 
   // @ts-ignore
@@ -32,7 +32,7 @@ export class SignUpComponent {
       this.form.password.trim()
     )
 
-    this.signUpService.signUp(this.signUpForm).subscribe(data => {
+    this.authService.signUp(this.signUpForm).subscribe(data => {
       this.form.reset();
     });
   }

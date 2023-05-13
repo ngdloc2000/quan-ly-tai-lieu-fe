@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="nav-log-1">
+  <img src="../../../../assets/images/Rectangle%2027.png" alt="Error">
+  <div class="nav-log-a">
+    <div class="logo-nav">
+      <img src="../../../../assets/images/Logo%20Cty%20(Chuan)%20-%20none%20background%201.png" alt="Error">
+    </div>
+    <div class="title-nav">TLĐ</div>
+  </div>
+  <div class="nav-log-b">
+    <div class="title-b-nav-1"><p>Giới thiệu</p></div>
+    <div class="title-b-nav-2"><p>Lĩnh vực hoạt động</p></div>
+    <div class="title-b-nav-3"><p>Liên hệ</p></div>
+  </div>
+</div>
+<div class="nav-log-2">
+  <div class="login">
+    <div class="log-1">Đăng nhập</div>
+    <form #f="ngForm" (ngSubmit)="f.form.valid && ngSubmit()" novalidate>
+      <label for="username">Tên tài khoản:</label>
+      <div class="log-2">
+        <input id="username" [(ngModel)]="form.username" #username="ngModel" required type="text" name="username"
+               placeholder="username_123">
+        <span *ngIf="username?.touched && username?.hasError('required')" class="error-message" id="error-username">Không được bỏ trống</span>
+      </div>
+      <div class="log-3">
+        <label for="password">Mật khẩu:</label>
+        <input id="password" [(ngModel)]="form.password" #password="ngModel" required type="password" name="password"
+               placeholder="Nhập mật khẩu...">
+        <span *ngIf="password?.touched && password?.hasError('required')"
+              class="error-message">Không được bỏ trống</span>
+      </div>
+      <span class="error-message">{{status}}</span>
+      <div class="log-4">
+        <input type="submit" value="Đăng nhập">
+      </div>
+      <div class="log-5">
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Ghi nhớ đăng nhập
+        </label>
+        <span class="psw">Quên <a href="#">mật khẩu?</a></span>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="nav-log-3">
+  <img src="../../../../assets/images/Rectangle%2012.png" alt="Error">
+</div>
+</body>
+</html>
