@@ -9,16 +9,16 @@ import {HttpClientModule} from '@angular/common/http';
 import {HomepageComponent} from './component/homepage/homepage.component';
 import {SignInComponent} from './component/auth/sign-in/sign-in.component';
 import {httpInterceptorProvider} from './auth.interceptor';
-import { ConstructionManagementComponent } from './component/management/construction/construction-management.component';
 import { HeaderComponent } from './component/management/header/header.component';
 import { MainComponent } from './component/management/main/main.component';
 import { MenuComponent } from './component/management/menu/menu.component';
+import { GeneralInformationComponent } from './component/management/construction/general-information/general-information.component';
 
 export const appRoutes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
   {path: 'sign-in', component: SignInComponent},
+  {path: 'management/construction/general-information', component: GeneralInformationComponent},
   {path: 'management', component: MainComponent},
-  {path: 'management/construction', component: SignInComponent},
   {path: '', component: HomepageComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
 ];
@@ -29,10 +29,10 @@ export const appRoutes: Routes = [
     SignUpComponent,
     HomepageComponent,
     SignInComponent,
-    ConstructionManagementComponent,
     HeaderComponent,
     MainComponent,
     MenuComponent,
+    GeneralInformationComponent,
   ],
   imports: [
     BrowserModule,
