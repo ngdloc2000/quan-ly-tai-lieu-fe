@@ -7,4 +7,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class MenuComponent {
 
+  tabIndex: number = 1;
+
+  tabSelected(index: number) {
+    this.tabIndex = index;
+  }
 }
