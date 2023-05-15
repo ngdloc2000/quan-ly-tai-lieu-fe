@@ -18,6 +18,8 @@ import {
 import {
   ConstructionProfileComponent
 } from './component/management/construction/construction-profile/construction-profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 export const appRoutes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
@@ -43,6 +45,8 @@ export const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    SlickCarouselModule,
     RouterModule.forRoot(appRoutes, {useHash: false})
   ],
   providers: [httpInterceptorProvider],

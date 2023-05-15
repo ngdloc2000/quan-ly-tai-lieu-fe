@@ -1,0 +1,70 @@
+.title-management {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  align-items: center;
+}
+
+.title-management-text {
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.title-management-type {
+  font-size: 16px;
+  margin-right: 10px;
+  width: 250px;
+}
+
+.btn-group-profile-total {
+  min-width: 300px;
+  align-items: center;
+  background-color: #6c7ee1;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  height: 50px;
+  font-weight: bold;
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 20px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+  color: white;
+  padding: 0 18px;
+}
+
+.number-profile {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.btn-group-profile {
+  min-width: 300px;
+  align-items: center;
+  background-color: #ECECEC;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  height: 50px;
+  font-weight: bold;
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 20px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+  color: #100f0f;
+  padding: 0 18px;
+}
+
+.content-profile {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.btn-group-profile.active {
+  opacity: 1;
+  background-color: #FFD5AE;
+}
+
+.btn-group-profile:hover {
+  scale: 105%;
+}

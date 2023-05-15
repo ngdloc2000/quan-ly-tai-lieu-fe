@@ -1,47 +1,62 @@
-<div class="body-qlct">
-  <div class="side-bar-1">
-    <button class="sidebar-toggle"><i class="fas fa-bars"></i></button>
-    <nav>
-      <ul>
-        <li><a class="dropdown-toggle"><i class="fas fa-industry"></i><span class="toggle-text">Quản lý công trình</span></a>
-          <ul class="dropdown-menu">
-            <li><a (click)="tabSelected(1)">Thông tin chung</a></li>
-            <li><a href="#">Thông tin quản lý</a></li>
-            <li><a (click)="tabSelected(3)">Hồ sơ công trình</a></li>
-            <li><a href="#">Hồ sơ vi phạm</a></li>
-            <li><a href="#">Hồ sơ vận hành</a></li>
-            <li><a href="#">Hồ sơ khác</a></li>
-          </ul>
+<div class="container-fluid">
+  <div class="row d-flex flex-nowrap">
+    <div class="col-2 menu">
+      <ul class="list-group">
+        <p class="menu-title">Danh mục quản lý</p>
+        <li style="border-bottom: 1px solid #c3cad1;">
+          <a class="menu-item" data-bs-toggle="collapse" href="#qlcongtrinh" role="button" aria-expanded="false" aria-controls="qlcongtrinh">
+            <div><i class="fas fa-industry"></i><span class="menu-item-name">Quản lý công trình</span></div>
+            <span class="dropdown-toggle-img"><i class="fa-solid fa-caret-down"></i></span>
+          </a>
+          <div class="collapse sub-menu-title-item" id="qlcongtrinh">
+            <ul class="">
+              <li (click)="tabSelected(1)" class="sub-menu-item">Thông tin chung</li>
+              <li (click)="tabSelected(2)" class="sub-menu-item">Thông tin quản lý</li>
+              <li (click)="tabSelected(3)" class="sub-menu-item">Hồ sơ công trình</li>
+              <li (click)="tabSelected(4)" class="sub-menu-item">Hồ sơ vi phạm</li>
+              <li (click)="tabSelected(5)" class="sub-menu-item">Hồ sơ vận hành</li>
+              <li (click)="tabSelected(6)" class="sub-menu-item">Hồ sơ khác</li>
+            </ul>
+          </div>
         </li>
-        <li><a href="#" class="dropdown-toggle"><i class="fas fa-chart-line"></i><span class="toggle-text">Quản lý SXKD&ĐTPT</span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Dropdown item 1</a></li>
-            <li><a href="#">Dropdown item 2</a></li>
-            <li><a href="#">Dropdown item 3</a></li>
-          </ul>
+        <li style="border-bottom: 1px solid #c3cad1;">
+          <a class="menu-item" data-bs-toggle="collapse" href="#qlsxkddtpt" role="button" aria-expanded="false" aria-controls="qlsxkddtpt">
+            <div><i class="fas fa-chart-line"></i><span class="menu-item-name">Quản lý SXKD&ĐTPT</span></div>
+            <span class="dropdown-toggle-img"><i class="fa-solid fa-caret-down"></i></span>
+          </a>
+          <div class="collapse sub-menu-title-item" id="qlsxkddtpt">
+            <ul class="">
+              <li class="sub-menu-item">Thông tin chung</li>
+            </ul>
+          </div>
         </li>
-        <li><a href="#" class="dropdown-toggle"><i class="fas fa-users"></i><span
-          class="toggle-text">Quản lý nhân sự</span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#" class="toggle-text">Dropdown item 1</a></li>
-            <li><a href="#" class="toggle-text">Dropdown item 2</a></li>
-            <li><a href="#" class="toggle-text">Dropdown item 3</a></li>
-          </ul>
+        <li style="border-bottom: 1px solid #c3cad1;">
+          <a class="menu-item" data-bs-toggle="collapse" href="#qlns" role="button" aria-expanded="false" aria-controls="qlns">
+            <div><i class="fas fa-users"></i><span class="menu-item-name">Quản lý nhân sự</span></div>
+            <span class="dropdown-toggle-img"><i class="fa-solid fa-caret-down"></i></span>
+          </a>
+          <div class="collapse sub-menu-title-item" id="qlns">
+            <ul class="">
+              <li class="sub-menu-item">Thông tin chung</li>
+            </ul>
+          </div>
         </li>
-        <li><a href="#" class="dropdown-toggle"><i class="fas fa-money-check"></i><span class="toggle-text">Quản lý tài sản</span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Dropdown item 1</a></li>
-            <li><a href="#">Dropdown item 2</a></li>
-            <li><a href="#">Dropdown item 3</a></li>
-          </ul>
+        <li style="border-bottom: 1px solid #c3cad1;">
+          <a class="menu-item" data-bs-toggle="collapse" href="#qlts" role="button" aria-expanded="false" aria-controls="qlts">
+            <div><i class="fas fa-money-check"></i><span class="menu-item-name">Quản lý tài sản</span></div>
+            <span class="dropdown-toggle-img"><i class="fa-solid fa-caret-down"></i></span>
+          </a>
+          <div class="collapse sub-menu-title-item" id="qlts">
+            <ul class="">
+              <li class="sub-menu-item">Thông tin chung</li>
+            </ul>
+          </div>
         </li>
       </ul>
-    </nav>
-  </div>
-  <div class="content" *ngIf="tabIndex == 1">
-    <app-general-information></app-general-information>
-  </div>
-  <div class="content" *ngIf="tabIndex == 3">
-    <app-construction-profile></app-construction-profile>
+    </div>
+    <div class="col-10">
+      <app-general-information *ngIf="tabIndex == 1"></app-general-information>
+      <app-construction-profile *ngIf="tabIndex == 3"></app-construction-profile>
+    </div>
   </div>
 </div>
