@@ -891,9 +891,7 @@ table td:nth-child(2) {
   margin-bottom: 0.5rem;
 }
 
-.modal select option[value="none"] {
-  color: #aaa;
-}
+
 
 /* Button Styling */
 .modal button {

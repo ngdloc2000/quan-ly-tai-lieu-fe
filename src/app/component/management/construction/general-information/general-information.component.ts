@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {ConstructionService} from "../../../../service/construction.service";
 import {Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-general-information',
@@ -22,7 +23,10 @@ export class GeneralInformationComponent implements OnInit{
   files?: FileList;
 
   constructor(private router: Router,
-              private constructionService: ConstructionService) {
+              private constructionService: ConstructionService,
+              private renderer: Renderer2,
+              private elementRef: ElementRef
+              ) {
   }
   ngOnInit(): void {
     this.constructionService.getAllCongTrinhCount().subscribe((response: any) => {
@@ -254,13 +258,19 @@ export class GeneralInformationComponent implements OnInit{
   }
 
   closeModal(event: any) {
+    console.log(event);
     if(event.id == "cancelBtn-1"){
-      const modal = document.getElementById('myModal-1');
-
-      // Sử dụng API Bootstrap để mở modal
-      // @ts-ignore
-      const bootstrapModal = new bootstrap.Modal(modal);
-      bootstrapModal.hide();
+      const element = this.elementRef.nativeElement.querySelector('#myModal-1');
+      const element1 = document.querySelector('.modal-backdrop');
+      // const modal = document.getElementById('myModal-1');
+      this.renderer.setStyle(element, 'display', 'none');
+      this.renderer.removeClass(element1, 'modal-backdrop');
+    }
+    else if(event.id == "closeBtn-delete-1"){
+      const element = this.elementRef.nativeElement.querySelector('#modalDelete-1');
+      const element1 = document.querySelector('.modal-backdrop');
+      this.renderer.setStyle(element, 'display', 'none');
+      this.renderer.removeClass(element1, 'modal-backdrop');
     }
   }
 
