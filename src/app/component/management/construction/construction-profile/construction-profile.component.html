@@ -1,50 +1,35 @@
-<div class="title-management">
-  <span class="title-management-text">Quản lý công trình > Hồ sơ công trình</span>
-  <select class="form-select form-select-sm title-management-type" aria-label=".form-select-sm example">
-    <option value="1" selected>Theo loại hồ sơ công trình</option>
-    <option value="2">Theo năm lập hồ sơ</option>
-  </select>
-</div>
-<div class="content-profile">
-  <div class="btn-toolbar d-flex flex-nowrap">
-    <div class="btn-group-profile-total me-2">
-      <span class="group-name">Tổng hồ sơ</span>
-      <span class="number-profile">1111</span>
-    </div>
-    <div id="profile0"
-         class="btn-group-profile me-2"
-         (click)="tabProfileSelected(0)"
-         [ngClass]="{'active': isSelected(0)}"
-    >
-      <span class="group-name">HS cống dưới đê</span>
-      <span class="number-profile">1111</span>
-    </div>
-    <div id="profile1"
-         class="btn-group-profile me-2"
-         (click)="tabProfileSelected(1)"
-         [ngClass]="{'active': isSelected(1)}"
-    >
-      <span class="group-name">HS trạm bơm</span>
-      <span class="number-profile">1111</span>
-    </div>
-    <div class="btn-group-profile me-2">
-      <span class="group-name">HS kênh cấp I</span>
-      <span class="number-profile">1111</span>
-    </div>
-    <div class="btn-group-profile me-2">
-      <span class="group-name">HS kênh tưới sau TB</span>
-      <span class="number-profile">1111</span>
-    </div>
-    <div class="btn-group-profile me-2">
-      <span class="group-name">HS công trình trên kênh</span>
-      <span class="number-profile">1111</span>
-    </div>
-    <div class="btn-group-profile me-2">
-      <span class="group-name">HS công trình khác</span>
-      <span class="number-profile">1111</span>
+<div *ngIf="isDataLoaded">
+  <div class="title-management">
+    <span class="title-management-text">Quản lý công trình > Hồ sơ công trình</span>
+    <select class="form-select form-select-sm title-management-type" aria-label=".form-select-sm example"
+            [(ngModel)]="selectedOption" (ngModelChange)="onOptionChange($event)">
+      <option value="HANG_MUC" [selected]="selectedOption === 'HANG_MUC'">Theo loại hồ sơ công trình</option>
+      <option value="NAM_THANH_LAP" [selected]="selectedOption === 'NAM_THANH_LAP'">Theo năm lập hồ sơ</option>
+    </select>
+  </div>
+  <div class="content-profile">
+    <div class="btn-toolbar d-flex flex-nowrap">
+      <div class="btn-group-profile-total me-2">
+        <span class="group-name">Tổng hồ sơ</span>
+        <span class="number-profile">{{tongSoLuongHoSo}}</span>
+      </div>
+      <div *ngFor="let tkhs of thongKeHoSoList"
+           id="profile{{Number(tkhs.giaTriThongKe)}}"
+           class="btn-group-profile me-2"
+           (click)="tabProfileSelected(Number(tkhs.giaTriThongKe), tkhs.tieuDeHoSo)"
+           [ngClass]="{'active': isSelected(Number(tkhs.giaTriThongKe))}"
+      >
+        <span class="group-name">{{tkhs.tenThongKe}}</span>
+        <span class="number-profile">{{tkhs.soLuongHoSo == null ? 0 : tkhs.soLuongHoSo}}</span>
+      </div>
     </div>
   </div>
-</div>
-<div>
-  <span>Danh mục hồ sơ</span>
+  <div class="title-category">
+    <div *ngIf="selectedOption === 'HANG_MUC'">
+      <span style="padding-left: 40px">Danh mục hồ sơ</span><span style="margin-left: 5px">{{tieuDeHoSo}}</span>
+    </div>
+    <div *ngIf="selectedOption === 'NAM_THANH_LAP'">
+      <span style="padding-left: 40px">Danh mục hồ sơ năm</span><span style="margin-left: 5px">{{tieuDeHoSo}}</span>
+    </div>
+  </div>
 </div>

@@ -17,7 +17,7 @@
 }
 
 .btn-group-profile-total {
-  min-width: 300px;
+  min-width: 250px;
   align-items: center;
   background-color: #6c7ee1;
   cursor: pointer;
@@ -39,7 +39,7 @@
 }
 
 .btn-group-profile {
-  min-width: 300px;
+  min-width: 250px;
   align-items: center;
   background-color: #ECECEC;
   cursor: pointer;
@@ -67,4 +67,13 @@
 
 .btn-group-profile:hover {
   scale: 105%;
+}
+
+.title-category {
+  background-color: rgb(75, 85, 128);
+  color: white;
+  font-weight: 700;
+  height: 40px;
+  display: flex;
+  align-items: center;
 }

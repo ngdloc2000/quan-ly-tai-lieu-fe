@@ -8,6 +8,8 @@ import {Observable} from "rxjs";
 })
 export class ConstructionService {
 
+  private apiServerUrl = 'http://localhost:8080';
+
   constructor(private http: HttpClient) { }
 
   getAllCongTrinhCount(): Observable<BaseResponse> {
@@ -29,4 +31,9 @@ export class ConstructionService {
   getAllCongTrinh() {
     return this.http.get(`http://localhost:8080/api/cong-trinh/all`)
   }
+
+  getAllThongKeHoSoCongTrinh(option: String): Observable<BaseResponse> {
+    return this.http.get<BaseResponse>(`${this.apiServerUrl}/api/documents/thongKe?option=${option}`);
+  }
+
 }
