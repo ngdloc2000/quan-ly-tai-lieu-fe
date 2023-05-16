@@ -22,4 +22,11 @@ export class ConstructionService {
   deleteCongTrinh(maCT: String): any {
     return this.http.post(`http://localhost:8080/api/cong-trinh/delete-cong-trinh`, maCT);
   }
+  updateThongTinQuanLyCongTrinh(body: any) {
+    return this.http.post(`http://localhost:8080/api/cong-trinh/updateThongTinQuanLyCongTrinh`, body)
+
+  }
+  getAllCongTrinh() {
+    return this.http.get(`http://localhost:8080/api/cong-trinh/all`)
+  }
 }

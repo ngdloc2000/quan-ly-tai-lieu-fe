@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {ConstructionService} from "../../../../service/construction.service";
 import {Router} from "@angular/router";
+import * as $ from 'jquery';
 
 
 @Component({
@@ -8,15 +9,16 @@ import {Router} from "@angular/router";
   templateUrl: './general-information.component.html',
   styleUrls: ['./general-information.component.css']
 })
-export class GeneralInformationComponent implements OnInit{
+export class GeneralInformationComponent implements OnInit {
   countAll: any;
   listCTAll: any;
   listCT: any;
-  // @ts-ignore
-  infoForm: any = {};
-  // @ts-ignore
-  congTrinhSelectedMessage: string;
-  ortherInfomation: any;
+  listCTLienQuan: any;
+
+  infoForm: any = {
+    infoTypeSelect: 'link',
+  };
+  congTrinhSelectedMessage?: string;
   itemCT: any;
 
   images: File[] = [];
@@ -26,8 +28,9 @@ export class GeneralInformationComponent implements OnInit{
               private constructionService: ConstructionService,
               private renderer: Renderer2,
               private elementRef: ElementRef
-              ) {
+  ) {
   }
+
   ngOnInit(): void {
     this.constructionService.getAllCongTrinhCount().subscribe((response: any) => {
       this.countAll = response;
@@ -38,8 +41,12 @@ export class GeneralInformationComponent implements OnInit{
       this.listCT = this.listCTAll;
       this.congTrinhSelectedMessage = `Cống dưới đê (${this.countAll.congDuoiDe} công trình)`;
     })
+
+    this.constructionService.getAllCongTrinh().subscribe((response: any) => {
+      this.listCTLienQuan = response;
+    })
+
     this.initModalTrang3();
-    this.initRightBarTrang3();
   }
 
   changeCongTrinhType(type: string, message: string, count: number) {
@@ -82,24 +89,20 @@ export class GeneralInformationComponent implements OnInit{
   iconDeleteCT(maCT: any) {
     this.itemCT = maCT;
     const modal = document.getElementById('modalDelete-1');
-
-    // Sử dụng API Bootstrap để mở modal
     // @ts-ignore
     const bootstrapModal = new bootstrap.Modal(modal);
     bootstrapModal.show();
   }
+
   initModalTrang3() {
     const addNewBtn1 = document.getElementById('addNewBtn-1')!;
     const functionList1 = document.getElementById('functionList-1')!;
-    // Get the form and all input fields
+
     const form = document.querySelector("form")!;
     const inputFields = form.querySelectorAll("input, select")!;
 
-    // Hide the function list initially
     functionList1.style.display = "none";
-    // Show the function list when addNewBtn is clicked and hide the modal
     addNewBtn1.addEventListener('click', function () {
-      console.log('newBtn1 them moi');
       functionList1.style.display = "block";
     });
 
@@ -108,7 +111,6 @@ export class GeneralInformationComponent implements OnInit{
       functionList1.style.display = "none";
     });
 
-    // Function to clear all input fields in the form
     function clearFormInputs() {
       inputFields.forEach((field) => {
         (field as HTMLInputElement).value = "";
@@ -117,68 +119,8 @@ export class GeneralInformationComponent implements OnInit{
   }
 
 
-  initRightBarTrang3() {
-    document.addEventListener('DOMContentLoaded', function () {
-      var ellipsisMenus = document.querySelectorAll('.m-t-3');
-
-      ellipsisMenus.forEach(function (ellipsisMenu) {
-        var ellipsisBtn = ellipsisMenu.querySelector('.ellipsis-btn')!;
-        var menu = ellipsisMenu.querySelector('.menu-ellipsis1')! as HTMLElement;
-        var menuItems = ellipsisMenu.querySelectorAll('.menu-item-ell')!;
-
-        ellipsisBtn.addEventListener('click', function () {
-          menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        });
-
-        menuItems.forEach(function (menuItem) {
-          menuItem.addEventListener('click', function () {
-            menu.style.display = 'none';
-            // Thực hiện chức năng tương ứng với từng lựa chọn ở đây
-          });
-        });
-      });
-
-      document.addEventListener('click', function (event) {
-        var openMenu = document.querySelector('.menu[style="display: block;"]') as HTMLElement;
-        if (openMenu && !(event.target as HTMLElement).closest('.ellipsis-menu')) {
-          openMenu.style.display = 'none';
-        }
-      });
-    });
-
-    /*---------------------------------------------Ellipsis-nav----------------------------------------------------------*/
-    document.addEventListener('DOMContentLoaded', function () {
-      var ellipsisMenusNav = document.querySelectorAll('.side-menu')!;
-
-      ellipsisMenusNav.forEach(function (ellipsisMenu) {
-        var ellipsisBtnNav = ellipsisMenu.querySelector('.ellipsis-btn-nav')!;
-        var menu = ellipsisMenu.querySelector('.menu-ellipsis1-nav') as HTMLElement;
-        var menuItems = ellipsisMenu.querySelectorAll('.menu-item-ell-nav')!;
-
-        ellipsisBtnNav.addEventListener('click', function () {
-          menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        });
-
-        menuItems.forEach(function (menuItem) {
-          menuItem.addEventListener('click', function () {
-            menu.style.display = 'none';
-            // Thực hiện chức năng tương ứng với từng lựa chọn ở đây
-          });
-        });
-      });
-
-      document.addEventListener('click', function (event) {
-        var openMenu = document.querySelector('.menu[style="display: block;"]') as HTMLElement;
-        if (openMenu && !(event.target as HTMLElement).closest('.ellipsis-menu')) {
-          openMenu.style.display = 'none';
-        }
-      });
-    });
-  }
-
   addFile() {
     var input = document.getElementById('input-file')! as HTMLInputElement;
-
     if (input.files && input.files.length > 0) {
       this.files = input.files;
     }
@@ -194,7 +136,6 @@ export class GeneralInformationComponent implements OnInit{
 
   updateImageOptions1() {
     var input = document.getElementById('imageInput-1')! as HTMLInputElement;
-
     if (input.files) {
       for (var i = 0; i < input.files.length; i++) {
         this.images.push(input.files[i])
@@ -202,8 +143,50 @@ export class GeneralInformationComponent implements OnInit{
     }
   }
 
+  openModal(target: any) {
+    this.infoForm.infoTypeSelect = 'file';
+    if (target == 1) {
+      const modal = document.getElementById('myModal-1');
+      // @ts-ignore
+      const bootstrapModal = new bootstrap.Modal(modal);
+      bootstrapModal.show();
+    } else if (target == 2) {
+      const modal = document.getElementById('myModal-2');
+      // @ts-ignore
+      const bootstrapModal = new bootstrap.Modal(modal);
+      bootstrapModal.show();
+    }
+  }
 
+  closeModal(event: any, f: any) {
+    console.log(event);
+    console.log(f)
+    if (event.id == "cancelBtn-1") {
+      const element = this.elementRef.nativeElement.querySelector('#myModal-1');
+      const element1 = document.querySelector('.modal-backdrop');
+      this.renderer.setStyle(element, 'display', 'none');
+      this.renderer.removeClass(element1, 'modal-backdrop');
+      f.reset();
+    } else if (event.id == "closeBtn-delete-1") {
+      const element = this.elementRef.nativeElement.querySelector('#modalDelete-1');
+      const element1 = document.querySelector('.modal-backdrop');
+      this.renderer.setStyle(element, 'display', 'none');
+      this.renderer.removeClass(element1, 'modal-backdrop');
+    } else if (event.id == "cancelBtn-2") {
+      const element = this.elementRef.nativeElement.querySelector('#myModal-2');
+      const element1 = document.querySelector('.modal-backdrop');
+      this.renderer.setStyle(element, 'display', 'none');
+      this.renderer.removeClass(element1, 'modal-backdrop');
+      f.reset();
+    }
+  }
 
+  acceptDeleteCT() {
+    this.constructionService.deleteCongTrinh(this.itemCT).subscribe((response: any) => {
+      console.log(response);
+      location.reload();
+    });
+  }
 
   createCongTrinh() {
     console.log(this.files);
@@ -219,9 +202,9 @@ export class GeneralInformationComponent implements OnInit{
     formData.append("thongTinKhac", this.infoForm.thongTinKhac);
     formData.append("soThuTu", this.infoForm.soThuTu);
 
-    if(this.infoForm.infoTypeSelect == "Link"){
+    if (this.infoForm.infoTypeSelect == "link") {
       formData.append("link", this.infoForm.link);
-    }else {
+    } else {
       if (this.files && this.files.length > 0) {
         for (let i = 0; i < this.files.length; i++) {
           formData.append("files", this.files.item(i)!, this.files[i].name);
@@ -234,12 +217,6 @@ export class GeneralInformationComponent implements OnInit{
       }
     }
 
-    const aemails = formData.getAll("images");
-    console.log(aemails);
-
-    const filess = formData.getAll("files");
-    console.log(filess);
-
     this.constructionService.createCongTrinh(formData).subscribe((response: any) => {
       console.log(response);
       location.reload();
@@ -247,37 +224,37 @@ export class GeneralInformationComponent implements OnInit{
 
   }
 
-  openModal() {
-    // Lấy modal theo id
-    const modal = document.getElementById('myModal-1');
+  updateCongTrinh() {
+    console.log(this.infoForm)
+    const formData = new FormData();
+    formData.append("maCT", this.infoForm.maCT);
+    formData.append("quanLyTaiSanType", this.infoForm.quanLyTaiSanType);
+    formData.append("trangThaiCongTrinh", this.infoForm.trangThaiCongTrinh);
+    formData.append("viPhamLanChiem", this.infoForm.viPhamLanChiem);
+    formData.append("lichSuCT", this.infoForm.lichSuCT);
 
-    // Sử dụng API Bootstrap để mở modal
-    // @ts-ignore
-    const bootstrapModal = new bootstrap.Modal(modal);
-    bootstrapModal.show();
-  }
-
-  closeModal(event: any) {
-    console.log(event);
-    if(event.id == "cancelBtn-1"){
-      const element = this.elementRef.nativeElement.querySelector('#myModal-1');
-      const element1 = document.querySelector('.modal-backdrop');
-      // const modal = document.getElementById('myModal-1');
-      this.renderer.setStyle(element, 'display', 'none');
-      this.renderer.removeClass(element1, 'modal-backdrop');
-    }
-    else if(event.id == "closeBtn-delete-1"){
-      const element = this.elementRef.nativeElement.querySelector('#modalDelete-1');
-      const element1 = document.querySelector('.modal-backdrop');
-      this.renderer.setStyle(element, 'display', 'none');
-      this.renderer.removeClass(element1, 'modal-backdrop');
-    }
-  }
-
-  acceptDeleteCT() {
-    this.constructionService.deleteCongTrinh(this.itemCT).subscribe((response: any) => {
+    this.constructionService.updateThongTinQuanLyCongTrinh(formData).subscribe((response: any) => {
       console.log(response);
       location.reload();
     });
+  }
+
+  onCTSelected(maCT: string) {
+    const infoFormSelected = this.listCTLienQuan.find((ct: any) => ct.maCT == maCT);
+    this.infoForm.maCT = infoFormSelected.maCT;
+    this.infoForm.quanLyTaiSanType = infoFormSelected.quanLyTaiSanType;
+    this.infoForm.trangThaiCongTrinh = infoFormSelected.trangThaiCongTrinh;
+    this.infoForm.lichSuCT = infoFormSelected.lichSuCT;
+    this.infoForm.viPhamLanChiem = 'Đang cập nhật';
+    console.log(this.infoForm);
+  }
+
+  searchCongTrinhName(event: any) {
+    console.log(event.value)
+    if (event.value.length > 0) {
+      this.listCT = this.listCTAll.filter((ct: any) => ct.name.toLocaleLowerCase().includes(event.value.toLocaleLowerCase()));
+    } else {
+      this.listCT = this.listCTAll;
+    }
   }
 }

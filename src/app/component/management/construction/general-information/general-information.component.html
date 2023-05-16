@@ -61,155 +61,18 @@
         <div class="menu-tit-2">
           <div class="m-t-1" id="addNewBtn-1"><i class="fas fa-plus"></i>Thêm mới</div>
           <div id="functionList-1" class="function-list">
-            <div class="function-list-item" data-function="thongTinChung" (click)="openModal()">Thông tin chung</div>
-            <div class="function-list-item" data-function="thongTinQuanLy">Thông tin quản lý</div>
-          </div>
-          <div id="myModal2" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-              <span class="close-1">&times;</span>
-              <div class="infor-CT">
-                <div class="name-CT">Thông tin quản lý:
-                  <span class="name-1-CT">Công Trình Cống</span>
-                </div>
-              </div>
-              <div class="form-start">
-                <table style="overflow: auto">
-                  <thead>
-                  <tr>
-                    <th>TT</th>
-                    <th>Hạng mục</th>
-                    <th>Nhập thông tin mô tả</th>
-                    <th>Nhập dữ liệu</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <!-- Dòng 1 -->
-                  <tr>
-                    <td>01</td>
-                    <td>Công trình quản lý</td>
-                    <td>
-                      <div class="select-wrapper2">
-                        <select id="project-name-did-1" name="project-name-did-1" class="select">
-                          <option>Cống Trung Trang</option>
-                          <option>Cống Cổ Tiểu</option>
-                          <option>Cống Táo</option>
-                          <option>Cống Mai Dương</option>
-                          <option>Cống Cao Mật</option>
-                        </select>
-                      </div>
-                    </td>
-                    <td></td>
-                  </tr>
-                  <!-- Dòng 2 -->
-                  <tr>
-                    <td>02</td>
-                    <td>Quản lý tài sản</td>
-                    <td>
-                      <div class="select-wrapper2">
-                        <select id="project-type-1" name="project-type-1" class="select">
-                          <option>Sở NNPTNT</option>
-                          <option>Công Ty</option>
-                        </select>
-                      </div>
-                    </td>
-                    <td></td>
-                  </tr>
-                  <!-- Dòng 3 -->
-                  <tr>
-                    <td>03</td>
-                    <td>Trạng thái công trình</td>
-                    <td>
-                      <div class="select-wrapper2">
-                        <select id="project-status-1" name="project-status-1" class="select">
-                          <option>Đã cắm mốc</option>
-                          <option>Chưa cắm mốc</option>
-                        </select>
-                      </div>
-                    </td>
-                    <td></td>
-                  </tr>
-                  <!-- Dòng 4 -->
-                  <tr>
-                    <td></td>
-                    <td>Vi phạm lấn chiếm</td>
-                    <td>
-                      <input type="text" id="project-encroachment-violation-1" name="project-encroachment-violation-1"
-                             readonly value="Đang cập nhật">
-                    </td>
-                    <td></td>
-                  </tr>
-                  <!-- Dòng 5 -->
-                  <tr>
-                    <td>04</td>
-                    <td>Lịch sử công trình</td>
-                    <td><input type="text" id="project-history-1" name="project-history-1"></td>
-                    <td style="display: flex; align-items: center"><span
-                      style="margin-right: 3px">Lịch sử sửa chữa: </span>
-                      <input type="text" value="2 hồ sơ" style="width: 10vh; margin-right:30px" readonly>
-                      <input type="search" placeholder="Tìm kiếm hồ sơ công trình..." id="project-history-file-1"
-                             name="project-history-file-1" style="width: 45vh">
-                      <span class="error-message" id="project-history-error-1"></span>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="save-noti">
-                <table>
-                  <thead>
-                  <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <!-- Dòng 1 -->
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      Ghi chú: <input type="text">
-                    </td>
-                    <td>
-                      Thông báo tới:
-                      <select class="select">
-                        <option>Không thông báo</option>
-                        <option>Toàn công ty</option>
-                        <option>Ban giám đốc</option>
-                        <option>Phòng Kế hoạch - kỹ thuật</option>
-                        <option>Trà (PTP KHKT)</option>
-                      </select>
-                    </td>
-                    <td>
-                      <button type="submit" class="butt-can" id="cancelBtn1-2">Hủy</button>
-                      <button type="submit" class="butt-sav" id="saveBtn1-2">Lưu lại</button>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
+            <div class="function-list-item" data-function="thongTinChung" (click)="openModal(1)">Thông tin chung</div>
+            <div class="function-list-item" data-function="thongTinQuanLy" (click)="openModal(2)">Thông tin quản lý
             </div>
           </div>
           <div class="m-t-2">
             <form action="#" method="get">
               <div class="search-boxx">
-                <input type="text" class="search-txtt" placeholder="Tìm kiếm...">
+                <input type="text" class="search-txtt"
+                       (input)="searchCongTrinhName($event.target)"
+                       placeholder="Tìm kiếm...">
               </div>
             </form>
-          </div>
-          <div class="m-t-3" id="menu-ellipsis">
-            <div class="ellipsis-btn"><i class="fas fa-ellipsis-v"></i></div>
-            <div class="menu-ellipsis1">
-              <a class="menu-item-ell" id="toggleBtn1">Xóa</a>
-              <a class="menu-item-ell">Sắp xếp theo hồ sơ công trình</a>
-              <a class="menu-item-ell">Sắp xếp theo hồ sơ vi phạm</a>
-              <a class="menu-item-ell">Sắp xếp theo hồ sơ vận hành</a>
-              <a class="menu-item-ell">Sắp xếp theo hồ sơ khác</a>
-            </div>
           </div>
         </div>
       </div>
@@ -279,7 +142,7 @@
 
   </div>
 </div>
-<!-- Modal-1 -->
+<!-- The Modal Thong Tin Chung -->
 <div class="modal fade" id="myModal-1" style="width: 100%" tabindex="-1" aria-labelledby="myModal-1-label"
      aria-hidden="false">
   <div class="modal-dialog" style="min-width: 80vw !important;">
@@ -476,22 +339,24 @@
                   </td>
                   <td>
                     <div class="info-input-wrapper">
-                      <select class="infoType" id="infoTypeSelect" [(ngModel)]="infoForm.infoTypeSelect">
-                        <option value="link">Link</option>
-                        <option value="file">File</option>
+                      <select name="infoTypeSelect" id="infoTypeSelect" class="form-select"
+                              aria-label="Default select example" [(ngModel)]="infoForm.infoTypeSelect">
+                        <option value="link" [selected]="infoForm.infoTypeSelect == 'link'">Link</option>
+                        <option value="file" [selected]="infoForm.infoTypeSelect == 'file'">File</option>
                       </select>
+
                       <input
                         type="text"
                         class="input-link"
                         id="input-link"
                         [(ngModel)]="infoForm.link"
+                        *ngIf="infoForm.infoTypeSelect == 'link'"
                         placeholder="Nhập link"
                       />
                       <input
                         type="file"
-                        class="input-file"
-                        style="display: none"
                         id="input-file"
+                        *ngIf="infoForm.infoTypeSelect == 'file'"
                         multiple
                         (change)="addFile()"
                       />
@@ -561,7 +426,7 @@
                       data-dismiss="modal"
                       class="butt-can"
                       id="cancelBtn-1"
-                      (click)="closeModal($event.target)"
+                      (click)="closeModal($event.target, f)"
                     >
                       Hủy
                     </button>
@@ -584,6 +449,93 @@
   </div>
 </div>
 
+<!-- The Modal Thong Tin Quan Ly -->
+<div class="modal fade" id="myModal-2" style="width: 100%" tabindex="-1" aria-labelledby="myModal-2-label"
+     aria-hidden="false">
+  <div class="modal-dialog" style="min-width: 80vw !important;">
+    <div class="modal-content" style="width: 80vw">
+      <div class="modal-body">
+        <div class="modal-content">
+          <span class="close1">&times;</span>
+          <h2>Thông tin công trình</h2>
+          <form #f="ngForm" (ngSubmit)="f.form.valid && updateCongTrinh()" novalidate id="updateCT">
+            <div class="form-group">
+              <label for="project-name-did"
+              >Chọn công trình quản lý:</label
+              >
+              <select
+                id="project-name-did"
+                name="project-name-did"
+                (change)="onCTSelected(infoForm.maCT)"
+                [(ngModel)]="infoForm.maCT"
+
+              >
+                <option
+                  *ngFor="let ct of listCTLienQuan; let i = index"
+                  [value]="ct.maCT"
+                >
+                  {{ ct.name }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="project-type">Quản lý tài sản:</label>
+              <select
+                id="project-type"
+                name="project-type"
+                [(ngModel)]="infoForm.quanLyTaiSanType"
+              >
+                <option value="SO_NNPTNT" [selected]="infoForm.quanLyTaiSanType == 'SO_NNPTNT'">Sở NNPTNT</option>
+                <option value="CONG_TY_DA_DO" [selected]="infoForm.quanLyTaiSanType == 'CONG_TY_DA_DO'">Công Ty</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="project-status">Trạng thái công trình:</label>
+              <select
+                id="project-status"
+                name="project-status"
+                [(ngModel)]="infoForm.trangThaiCongTrinh"
+              >
+                <option value="DA_CAM_MOC" [selected]="infoForm.trangThaiCongTrinh == 'DA_CAM_MOC'" >Đã cắm mốc</option>
+                <option value="CHUA_CAM_MOC" [selected]="infoForm.trangThaiCongTrinh == 'CHUA_CAM_MOC'">chưa cắm mốc</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="project-encroachment-violation"
+              >Vi phạm lấn chiếm:</label
+              >
+              <input
+                type="text"
+                id="project-encroachment-violation"
+                name="project-encroachment-violation"
+                value="Đang cập nhật"
+                [(ngModel)]="infoForm.viPhamLanChiem"
+              />
+            </div>
+            <div class="form-group">
+              <label for="project-history">Lịch sử công trình:</label>
+              <input
+                type="text"
+                id="project-history"
+                name="project-history"
+                [(ngModel)]="infoForm.lichSuCT"
+                required
+                #projecthistory1="ngModel"
+              />
+              <span *ngIf="projecthistory1?.touched
+                       && projecthistory1?.hasError('required')" class="error-message" id="error-projecthistory1">Chưa nhập thông tin lịch sử xây dựng công trình!</span>
+            </div>
+            <div class="form-group">
+              <button type="submit" id="saveBtn-2" (click)="updateCongTrinh()">Lưu thông tin</button>
+              <button type="button" id="cancelBtn-2" (click)="closeModal($event.target, f)" >Hủy bỏ</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--ModalDelete-->
 <div class="modal fade" id="modalDelete-1" tabindex="-1" role="dialog" aria-labelledby="modalDelete-1"
      aria-hidden="true">
@@ -597,11 +549,15 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="acceptDeleteCT()">Xóa</button>
-        <button type="button" id="closeBtn-delete-1" class="btn btn-secondary" (click)="closeModal($event.target)" data-dismiss="modal" >Close</button>
+        <button type="button" id="closeBtn-delete-1" class="btn btn-secondary" (click)="closeModal($event.target, '')"
+                data-dismiss="modal">Close
+        </button>
       </div>
     </div>
   </div>
 </div>
+
+
 
 
 
